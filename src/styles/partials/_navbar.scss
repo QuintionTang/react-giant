@@ -1,0 +1,241 @@
+/* main navigation */
+.logo .logo-light {
+    opacity: 1;
+    -moz-opacity: 1;
+    -webkit-opacity: 1;
+    filter: alpha(opacity=100);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    height: auto;
+}
+
+.logo .logo-dark {
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    filter: alpha(opacity=0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    height: 0;
+}
+
+.main-navigation-bg .logo .logo-light {
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    filter: alpha(opacity=0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    height: 0;
+}
+
+.main-navigation-bg .logo .logo-dark {
+    opacity: 1;
+    -moz-opacity: 1;
+    -webkit-opacity: 1;
+    filter: alpha(opacity=100);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    height: auto;
+}
+
+.navbar-bg-switch {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+    z-index: 999;
+}
+
+.logo {
+    padding-top: 21px;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        padding-top: 20px;
+    }
+}
+
+@media only screen and (min-width: 880px) {
+    .logo.logo-bordered {
+        padding-top: 61px;
+    }
+}
+
+.main-navigation .navbar-nav li a {
+    font-family: "Raleway", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    padding: 50px 15px 35px 15px;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+.main-navigation.main-navigation-split-content .navbar-nav li a,
+.main-navigation.main-navigation-split-content .navbar-nav li a:hover {
+    color: #ccc;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-navigation.main-navigation-split-content .navbar-nav li a,
+    .main-navigation.main-navigation-split-content .navbar-nav li a:hover {
+        color: #111;
+    }
+}
+
+@media only screen and (min-width: 880px) {
+    .main-navigation.main-navigation-bordered .navbar-nav li a {
+        padding: 90px 15px 35px 15px;
+    }
+}
+
+.main-navigation.dark .navbar-nav li a {
+    color: #111;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-navigation .navbar-nav li a {
+        color: #111;
+        padding: 10px 15px;
+    }
+}
+
+.main-navigation .navbar-nav li a:hover {
+    color: #fff;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+.main-navigation.dark .navbar-nav li a:hover {
+    color: #111;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-navigation .navbar-nav li a:hover {
+        color: #111;
+    }
+}
+
+.nav li a:focus,
+.nav li a:hover {
+    color: #fff;
+    background: none;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+.main-navigation-bg {
+    background: rgba(255, 255, 255, 1);
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+}
+
+.main-navigation-bg-bordered {
+    background: rgba(255, 255, 255, 1);
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.main-navigation-bg .logo {
+    padding-top: 5px;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-navigation-bg .logo {
+        padding-top: 5px;
+    }
+}
+
+.main-navigation-bg .main-navigation .navbar-nav li a {
+    color: #111;
+    padding: 19px 15px 0 15px;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-navigation-bg .main-navigation .navbar-nav li a {
+        padding: 10px 15px;
+    }
+}
+
+.main-navigation-bg .main-navigation .navbar-nav li a:hover {
+    color: #111;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-toggle .icon-bar {
+        background: #fff;
+    }
+
+    .navbar-toggle.dark .icon-bar {
+        background: #111;
+    }
+
+    .main-navigation-bg .navbar-toggle .icon-bar {
+        background: #111;
+    }
+
+    .navbar-toggle {
+        margin-top: -30px;
+        margin-right: -10px;
+        -webkit-transition: all 0.4s ease-out;
+        -moz-transition: all 0.4s ease-out;
+        -ms-transition: all 0.4s ease-out;
+        -o-transition: all 0.4s ease-out;
+        transition: all 0.4s ease-out;
+    }
+
+    .main-navigation-bg .navbar-toggle {
+        margin-top: -45px;
+        margin-right: -10px;
+        -webkit-transition: all 0.4s ease-out;
+        -moz-transition: all 0.4s ease-out;
+        -ms-transition: all 0.4s ease-out;
+        -o-transition: all 0.4s ease-out;
+        transition: all 0.4s ease-out;
+    }
+
+    .navbar-collapse {
+        background: rgba(255, 255, 255, 1);
+    }
+}
