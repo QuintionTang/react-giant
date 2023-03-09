@@ -1,9 +1,42 @@
 import Link from "next/link";
+import axios from "axios";
 import React from "react";
 import Image from "next/image";
 import footerLogo from "../../public/assets/images/logo-footer.png";
+import { useForm } from "react-hook-form";
 import cn from "classnames";
 const Footer = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
+
+    async function onSubmitForm(values) {
+        let config = {
+            method: "post",
+            url: `/api/subscribe`,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: values,
+        };
+
+        try {
+            const response = await axios(config);
+
+            if (response.status === 200) {
+                console.log("Your mail submitted!");
+                reset();
+            } else {
+                console.log(response);
+            }
+        } catch (err) {
+            console.log(err.message);
+            reset();
+        }
+    }
     return (
         <section id="footer">
             <div className={cn("container-fluid sections")}>
@@ -72,7 +105,7 @@ const Footer = () => {
                         <div id="newsletter">
                             <div className={cn("newsletter")}>
                                 <form
-                                    action="subscribe.php"
+                                    onSubmit={handleSubmit(onSubmitForm)}
                                     id="subscribe"
                                     method="post"
                                     name="subscribe"
@@ -81,14 +114,52 @@ const Footer = () => {
                                         className={cn(
                                             "subscribe-requiredField subscribe-email"
                                         )}
-                                        id="subscribe-email"
-                                        name="subscribe-email"
-                                        placeholder="Email"
+                                        id="firstname"
+                                        name="firstname"
+                                        {...register("firstname", {
+                                            required: {
+                                                value: true,
+                                                message:
+                                                    "You most enter firstname",
+                                            },
+                                        })}
+                                        placeholder="First Name*"
                                         type="text"
                                     />
-                                    <div
-                                        className={cn("subscribe-error")}
-                                    ></div>
+                                    <input
+                                        className={cn(
+                                            "subscribe-requiredField subscribe-email"
+                                        )}
+                                        id="email"
+                                        name="email"
+                                        placeholder="Your Email Address*"
+                                        type="text"
+                                        {...register("email", {
+                                            required: {
+                                                value: true,
+                                                message:
+                                                    "You must enter email address",
+                                            },
+                                            minLength: {
+                                                value: 8,
+                                                message:
+                                                    "This is not long enough to be an email",
+                                            },
+                                            maxLength: {
+                                                value: 120,
+                                                message: "This is too long",
+                                            },
+                                            pattern: {
+                                                value: /\S+@\S+\.\S+/,
+                                                message:
+                                                    "invalid email address",
+                                            },
+                                        })}
+                                    />
+                                    <div className={cn("subscribe-error")}>
+                                        {errors?.email?.message}
+                                        {errors?.name?.message}
+                                    </div>
                                     <button
                                         className={cn("c-btn fullwidth")}
                                         id="submit-2"
