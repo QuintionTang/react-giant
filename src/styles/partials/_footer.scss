@@ -120,8 +120,7 @@ section h2.section-heading.newsletter {
 #subscribe-wrapper {
     position: relative;
     width: 300px;
-    height: 160px;
-    margin: 58px auto 72px auto;
+    margin: 38px auto 42px auto;
     background: none;
     text-align: center;
 }
@@ -138,7 +137,7 @@ section h2.section-heading.newsletter {
     clear: both;
     border: none;
     background: none;
-    padding: 0;
+    padding: 20px 0px 0px 0px;
     overflow: hidden;
 }
 
@@ -178,7 +177,6 @@ section h2.section-heading.newsletter {
 }
 
 .subscribe-success {
-    font-family: "Dosis", sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 500;
@@ -187,7 +185,7 @@ section h2.section-heading.newsletter {
     text-align: center;
     color: #111;
     margin: 0 auto;
-    padding: 80px 0 0 0;
+    padding: 10px 0px;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

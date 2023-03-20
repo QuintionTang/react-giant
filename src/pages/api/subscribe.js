@@ -1,12 +1,6 @@
-import { MongoClient } from "mongodb";
-import IsEmail from "isemail";
+import mongoose from "mongoose";
+import subscribes from "../../models/subscribes";
 
-const isEmpty = (val) => {
-    return val === null || val === undefined;
-};
-const validateEmail = (mail) => {
-    return !isEmpty(mail) && IsEmail.validate(mail);
-};
 class mongoHelper {
     constructor(
         url = "mongodb://localhost:27017",
@@ -16,34 +10,22 @@ class mongoHelper {
         },
         dbName = "powerful"
     ) {
-        this._dbClient = new MongoClient(url, options);
-        this._dbName = dbName;
         this._dbClient;
+        this._dbUrl = `${url}/${dbName}`;
+        this._dbOpts = options;
         this._connected = false;
         this._collection = null;
     }
 
     async connect() {
         if (!this._connected) {
-            await this._dbClient.connect();
+            await mongoose.connect(this._dbUrl);
             this._connected = true;
         }
         return this;
     }
 
-    async collection(collectionName, indexOption, uniqueOpts) {
-        if (this._connected && !this._collection) {
-            const db = this._dbClient.db(this._dbName);
-            const collection = db.collection(collectionName);
-            await collection.createIndex(indexOption, uniqueOpts);
-            this._db = db;
-            this._collection = collection;
-        }
-        return this._collection;
-    }
-
     close() {
-        this._dbClient.close();
         this._connected = false;
         this._collection = null;
     }
@@ -59,35 +41,27 @@ export default async function handler(req, res) {
     const { firstname, email } = req.body;
     try {
         const ip = getIp(req);
-        if (!!firstname && validateEmail(email)) {
+        if (!!firstname && !!email) {
             const dbHelper = new mongoHelper();
 
             await dbHelper.connect();
-            const subscribeCollection = await dbHelper.collection(
-                "site-subscribes",
-                { email: 1, ip: 1 },
-                { unique: true }
-            );
 
-            const findResult = await subscribeCollection
-                .find({ email })
-                .toArray();
-            if (findResult.length > 0) {
-                res.status(500).json({ message: "Email is exist!" });
+            const findResult = await subscribes.findOne({ email });
+            if (findResult) {
+                res.status(500).json({ message: "Email地址已经订阅过！" });
             } else {
-                const findRowsByIp = await subscribeCollection
+                const findRowsByIp = await subscribes
                     .find({ ip })
-                    .count();
+                    .countDocuments();
                 if (findRowsByIp < 5) {
-                    await subscribeCollection.insertOne({
+                    await subscribes.create({
                         firstname,
                         email,
                         ip,
                     });
-
                     dbHelper.close();
                     res.status(201).json({
-                        message: "Data inserted successfully!",
+                        message: "数据提交成功！谢谢！",
                     });
                 } else {
                     res.status(500).json({
@@ -97,7 +71,7 @@ export default async function handler(req, res) {
             }
         } else {
             res.status(500).json({
-                message: "firstname or email format is invalid",
+                message: "firstname or email 格式无效",
             });
         }
     } catch (error) {

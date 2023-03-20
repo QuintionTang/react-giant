@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import footerLogo from "../../public/assets/images/logo-footer.png";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import cn from "classnames";
 const Footer = () => {
     const {
@@ -13,7 +14,19 @@ const Footer = () => {
         reset,
     } = useForm();
 
+    const [loading, setLoading] = useState(false);
+    const [apiOutput, setApiOutput] = useState("");
+    const [apiError, setApiError] = useState("");
+
+    const handleChange = (event) => {
+        setApiError("");
+        setApiOutput("");
+    };
+
     async function onSubmitForm(values) {
+        setApiError("");
+        setLoading(true);
+        setApiOutput("");
         let config = {
             method: "post",
             url: `/api/subscribe`,
@@ -26,16 +39,17 @@ const Footer = () => {
         try {
             const response = await axios(config);
 
-            if (response.status === 200) {
-                console.log("Your mail submitted!");
+            if (response.status === 201) {
+                setApiOutput(`感谢您的订阅！`);
                 reset();
             } else {
                 console.log(response);
             }
-        } catch (err) {
-            console.log(err.message);
+        } catch (error) {
+            setApiError(error.response.data);
             reset();
         }
+        setLoading(false);
     }
     return (
         <section id="footer">
@@ -117,10 +131,10 @@ const Footer = () => {
                                         id="firstname"
                                         name="firstname"
                                         {...register("firstname", {
+                                            onChange: handleChange,
                                             required: {
                                                 value: true,
-                                                message:
-                                                    "You most enter firstname",
+                                                message: "firstname 不能为空",
                                             },
                                         })}
                                         placeholder="First Name*"
@@ -135,37 +149,40 @@ const Footer = () => {
                                         placeholder="Your Email Address*"
                                         type="text"
                                         {...register("email", {
+                                            onChange: handleChange,
                                             required: {
                                                 value: true,
-                                                message:
-                                                    "You must enter email address",
-                                            },
-                                            minLength: {
-                                                value: 8,
-                                                message:
-                                                    "This is not long enough to be an email",
-                                            },
-                                            maxLength: {
-                                                value: 120,
-                                                message: "This is too long",
+                                                message: "EMAIL不能为空",
                                             },
                                             pattern: {
                                                 value: /\S+@\S+\.\S+/,
-                                                message:
-                                                    "invalid email address",
+                                                message: "EMAIL地址格式不对",
                                             },
                                         })}
                                     />
+                                    {apiOutput && (
+                                        <div
+                                            className={cn("subscribe-success")}
+                                        >
+                                            Thank you {"for"} subscribing.
+                                        </div>
+                                    )}
+
                                     <div className={cn("subscribe-error")}>
                                         {errors?.email?.message}
                                         {errors?.name?.message}
+                                        {apiError?.message}
                                     </div>
                                     <button
                                         className={cn("c-btn fullwidth")}
                                         id="submit-2"
                                         type="submit"
                                     >
-                                        <span>Subscribe</span>
+                                        {loading ? (
+                                            <span>加载中…</span>
+                                        ) : (
+                                            <span>订阅</span>
+                                        )}
                                     </button>
                                 </form>
                             </div>
