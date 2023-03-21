@@ -40,7 +40,7 @@ const Footer = () => {
             const response = await axios(config);
 
             if (response.status === 201) {
-                setApiOutput(`感谢您的订阅！`);
+                setApiOutput(`Your mail submitted!`);
                 reset();
             } else {
                 console.log(response);
@@ -134,10 +134,11 @@ const Footer = () => {
                                             onChange: handleChange,
                                             required: {
                                                 value: true,
-                                                message: "firstname 不能为空",
+                                                message:
+                                                    "You most enter firstname",
                                             },
                                         })}
-                                        placeholder="First Name*"
+                                        placeholder="Your First Name*"
                                         type="text"
                                     />
                                     <input
@@ -146,17 +147,19 @@ const Footer = () => {
                                         )}
                                         id="email"
                                         name="email"
-                                        placeholder="Your Email Address*"
+                                        placeholder="Your email*"
                                         type="text"
                                         {...register("email", {
                                             onChange: handleChange,
                                             required: {
                                                 value: true,
-                                                message: "EMAIL不能为空",
+                                                message:
+                                                    "You must enter email address",
                                             },
                                             pattern: {
                                                 value: /\S+@\S+\.\S+/,
-                                                message: "EMAIL地址格式不对",
+                                                message:
+                                                    "invalid email address",
                                             },
                                         })}
                                     />
@@ -179,9 +182,9 @@ const Footer = () => {
                                         type="submit"
                                     >
                                         {loading ? (
-                                            <span>加载中…</span>
+                                            <span>Loading…</span>
                                         ) : (
-                                            <span>订阅</span>
+                                            <span>Subscribe</span>
                                         )}
                                     </button>
                                 </form>

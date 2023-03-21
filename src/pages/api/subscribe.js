@@ -1,14 +1,17 @@
 import mongoose from "mongoose";
 import subscribes from "../../models/subscribes";
 
+const MONGOURL = process.env.MONGODB_URI;
+const DBNAME = process.env.DB_NAME;
+
 class mongoHelper {
     constructor(
-        url = "mongodb://localhost:27017",
+        url = MONGOURL,
         options = {
             useUnifiedTopology: true,
             useNewUrlParser: true,
         },
-        dbName = "powerful"
+        dbName = DBNAME
     ) {
         this._dbClient;
         this._dbUrl = `${url}/${dbName}`;
@@ -48,7 +51,9 @@ export default async function handler(req, res) {
 
             const findResult = await subscribes.findOne({ email });
             if (findResult) {
-                res.status(500).json({ message: "Email地址已经订阅过！" });
+                res.status(500).json({
+                    message: "Email address Already subscribed!",
+                });
             } else {
                 const findRowsByIp = await subscribes
                     .find({ ip })
@@ -61,7 +66,7 @@ export default async function handler(req, res) {
                     });
                     dbHelper.close();
                     res.status(201).json({
-                        message: "数据提交成功！谢谢！",
+                        message: "Data submitted successfully",
                     });
                 } else {
                     res.status(500).json({
@@ -71,7 +76,7 @@ export default async function handler(req, res) {
             }
         } else {
             res.status(500).json({
-                message: "firstname or email 格式无效",
+                message: "firstname or email Invalid",
             });
         }
     } catch (error) {

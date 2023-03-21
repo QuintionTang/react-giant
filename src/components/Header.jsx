@@ -3,9 +3,12 @@ import React from "react";
 import Image from "next/image";
 import logoPic from "../../public/assets/images/logo-dark.png";
 import cn from "classnames";
-const Header = () => {
+const Header = ({ nr }) => {
     return (
-        <nav className={cn("navbar navbar-fixed-top navbar-bg-switch")}>
+        <nav
+            className={cn("navbar navbar-fixed-top navbar-bg-switch")}
+            ref={nr}
+        >
             <div className={cn("container")}>
                 <div className={cn("navbar-header fadeIn-element")}>
                     <div className={cn("logo")}>

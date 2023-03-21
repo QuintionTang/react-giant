@@ -1,12 +1,10 @@
 import { scrollToTop } from "../libs/helper.js";
 import React from "react";
 import cn from "classnames";
-const ToTop = () => {
+const ToTop = ({ nr }) => {
     return (
-        <a className={cn("page-scroll")} onClick={scrollToTop}>
-            <div className={cn("to-top-arrow")}>
-                <span className={cn("ion-ios-arrow-up")}></span>
-            </div>
+        <a ref={nr} className={cn("to-top-arrow")} onClick={scrollToTop}>
+            <span className={cn("ion-ios-arrow-up")}></span>
         </a>
     );
 };
